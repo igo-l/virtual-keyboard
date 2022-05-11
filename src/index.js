@@ -68,26 +68,26 @@ let currentLang = RU;
 
 function createButtons(arr) {
   keyboardWrapper.innerHTML = '';
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     const keyboardRow = createElement(keyboardWrapper, 'div', 'keyboard__row');
-    for (let j = 0; j < arr[i].length; j++) {
+    for (let j = 0; j < arr[i].length; j += 1) {
       const keyboardButton = createElement(keyboardRow, 'div', 'keyboard__button');
       keyboardButton.innerHTML = arr[i][j];
       keyboardButton.dataset.code = keyCode[i][j];
-      if (arr[i][j] == 'Tab')keyboardButton.classList.add('keyboard__button_tab');
-      else if (arr[i][j] == 'CapsLock')keyboardButton.classList.add('keyboard__button_caps');
-      else if (arr[i][j] == 'Shift')keyboardButton.classList.add('keyboard__button_shift');
-      else if (arr[i][j] == 'Ctrl')keyboardButton.classList.add('keyboard__button_ctrl');
-      else if (arr[i][j] == 'Alt')keyboardButton.classList.add('keyboard__button_alt');
-      else if (arr[i][j] == 'Enter')keyboardButton.classList.add('keyboard__button_enter');
-      else if (arr[i][j] == 'Backspace')keyboardButton.classList.add('keyboard__button_backspace');
-      else if (arr[i][j] == 'Del')keyboardButton.classList.add('keyboard__button_del');
-      else if (arr[i][j] == ' ')keyboardButton.classList.add('keyboard__button_space');
-      else if (arr[i][j] == 'Win')keyboardButton.classList.add('keyboard__button_win');
-      else if (arr[i][j] == '&#9650;')keyboardButton.classList.add('keyboard__button_arrUp');
-      else if (arr[i][j] == '&#9668;')keyboardButton.classList.add('keyboard__button_arrLeft');
-      else if (arr[i][j] == '&#9660;')keyboardButton.classList.add('keyboard__button_arrDown');
-      else if (arr[i][j] == '&#9658;')keyboardButton.classList.add('keyboard__button_arrRight');
+      if (arr[i][j] === 'Tab')keyboardButton.classList.add('keyboard__button_tab');
+      else if (arr[i][j] === 'CapsLock')keyboardButton.classList.add('keyboard__button_caps');
+      else if (arr[i][j] === 'Shift')keyboardButton.classList.add('keyboard__button_shift');
+      else if (arr[i][j] === 'Ctrl')keyboardButton.classList.add('keyboard__button_ctrl');
+      else if (arr[i][j] === 'Alt')keyboardButton.classList.add('keyboard__button_alt');
+      else if (arr[i][j] === 'Enter')keyboardButton.classList.add('keyboard__button_enter');
+      else if (arr[i][j] === 'Backspace')keyboardButton.classList.add('keyboard__button_backspace');
+      else if (arr[i][j] === 'Del')keyboardButton.classList.add('keyboard__button_del');
+      else if (arr[i][j] === ' ')keyboardButton.classList.add('keyboard__button_space');
+      else if (arr[i][j] === 'Win')keyboardButton.classList.add('keyboard__button_win');
+      else if (arr[i][j] === '&#9650;')keyboardButton.classList.add('keyboard__button_arrUp');
+      else if (arr[i][j] === '&#9668;')keyboardButton.classList.add('keyboard__button_arrLeft');
+      else if (arr[i][j] === '&#9660;')keyboardButton.classList.add('keyboard__button_arrDown');
+      else if (arr[i][j] === '&#9658;')keyboardButton.classList.add('keyboard__button_arrRight');
       else keyboardButton.classList.add('keyboard__button_letter');
     }
   }
@@ -98,10 +98,10 @@ const kb = document.querySelectorAll('.keyboard__button');
 
 function changeKeyboard(arr) {
   let numOfButton = 0;
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr[i].length; j++) {
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let j = 0; j < arr[i].length; j += 1) {
       kb[numOfButton].innerHTML = arr[i][j];
-      numOfButton++;
+      numOfButton += 1;
     }
   }
 }
@@ -110,10 +110,10 @@ if (localStorage.getItem('currentLang') == null) {
   currentLang = RU;
   localStorage.setItem('currentLang', JSON.stringify(currentLang));
 } else {
-  if (localStorage.getItem('currentLang') == JSON.stringify(RU)) {
+  if (localStorage.getItem('currentLang') === JSON.stringify(RU)) {
     changeKeyboard(RU);
     currentLang = RU;
-  } if (localStorage.getItem('currentLang') == JSON.stringify(EN)) {
+  } if (localStorage.getItem('currentLang') === JSON.stringify(EN)) {
     changeKeyboard(EN);
     currentLang = EN;
   }
@@ -130,7 +130,7 @@ function getCursorPosition() {
     Sel.moveStart('character', -textArea.value.length);
 
     CaretPos = Sel.text.length;
-  } else if (textArea.selectionStart || textArea.selectionStart == '0') {
+  } else if (textArea.selectionStart || textArea.selectionStart === '0') {
     CaretPos = textArea.selectionStart;
   }
   return CaretPos;
@@ -149,7 +149,7 @@ const buttons = document.querySelectorAll('.keyboard__button');
 const buttonsLetter = document.querySelectorAll('.keyboard__button_letter');
 buttonsLetter.forEach(b => b.addEventListener('click', () => {
   insertInCurPos(b.textContent);
-  cursorPos++;
+  cursorPos += 1;
   textArea.focus();
   textArea.setSelectionRange(cursorPos, cursorPos);
 }));
@@ -157,7 +157,7 @@ buttonsLetter.forEach(b => b.addEventListener('click', () => {
 const buttonSpace = document.querySelector('.keyboard__button_space');
 buttonSpace.addEventListener('click', () => {
   insertInCurPos(' ');
-  cursorPos++;
+  cursorPos += 1;
   textArea.focus();
   textArea.setSelectionRange(cursorPos, cursorPos);
 });
@@ -165,14 +165,14 @@ buttonSpace.addEventListener('click', () => {
 const buttonTab = document.querySelector('.keyboard__button_tab');
 buttonTab.addEventListener('click', () => {
   insertInCurPos('\t');
-  cursorPos++;
+  cursorPos += 1;
   textArea.focus();
   textArea.setSelectionRange(cursorPos, cursorPos);
 });
 const buttonEnter = document.querySelector('.keyboard__button_enter');
 buttonEnter.addEventListener('click', () => {
   insertInCurPos('\n');
-  cursorPos++;
+  cursorPos += 1;
   textArea.focus();
   textArea.setSelectionRange(cursorPos, cursorPos);
 });
@@ -181,28 +181,28 @@ let isCaps = false;
 
 function createEventListenersFoKeyboard() {
   document.addEventListener('keydown', (event) => {
-    if (event.key.length == 1) {
-      for (let i = 0; i < keyCode.length; i++) {
-        for (let j = 0; j < keyCode[i].length; j++) {
-          if (keyCode[i][j] == event.code) {
-            if (currentLang == RU && !isCaps) {
+    if (event.key.length === 1) {
+      for (let i = 0; i < keyCode.length; i += 1) {
+        for (let j = 0; j < keyCode[i].length; j += 1) {
+          if (keyCode[i][j] === event.code) {
+            if (currentLang === RU && !isCaps) {
               insertInCurPos(RU[i][j]);
-              cursorPos++;
+              cursorPos += 1;
               textArea.focus();
               textArea.setSelectionRange(cursorPos, cursorPos);
-            } else if (currentLang == RU && isCaps) {
+            } else if (currentLang === RU && isCaps) {
               insertInCurPos(shiftedRU[i][j]);
-              cursorPos++;
+              cursorPos += 1;
               textArea.focus();
               textArea.setSelectionRange(cursorPos, cursorPos);
-            } else if (currentLang == EN && !isCaps) {
+            } else if (currentLang === EN && !isCaps) {
               insertInCurPos(EN[i][j]);
-              cursorPos++;
+              cursorPos += 1;
               textArea.focus();
               textArea.setSelectionRange(cursorPos, cursorPos);
-            } else if (currentLang == EN && isCaps) {
+            } else if (currentLang === EN && isCaps) {
               insertInCurPos(shiftedEN[i][j]);
-              cursorPos++;
+              cursorPos += 1;
               textArea.focus();
               textArea.setSelectionRange(cursorPos, cursorPos);
             }
@@ -210,25 +210,25 @@ function createEventListenersFoKeyboard() {
         }
       }
     }
-    if (event.key == 'Tab') {
+    if (event.key === 'Tab') {
       insertInCurPos('\t');
-      cursorPos++;
+      cursorPos += 1;
       textArea.focus();
       textArea.setSelectionRange(cursorPos, cursorPos);
     }
-    if (event.key == 'Enter') {
+    if (event.key === 'Enter') {
       insertInCurPos('\n');
-      cursorPos++;
+      cursorPos += 1;
       textArea.focus();
       textArea.setSelectionRange(cursorPos, cursorPos);
     }
     event.stopPropagation();
     event.preventDefault();
     buttons.forEach(button => {
-      if (event.code == button.dataset.code && event.key !== 'CapsLock') {
+      if (event.code === button.dataset.code && event.key !== 'CapsLock') {
         button.classList.add('active');
       }
-      if (event.key == 'CapsLock' && button.textContent == 'CapsLock') {
+      if (event.key === 'CapsLock' && button.textContent === 'CapsLock') {
         button.classList.toggle('active');
       }
     });
@@ -237,7 +237,7 @@ function createEventListenersFoKeyboard() {
     event.stopPropagation();
     event.preventDefault();
     buttons.forEach(button => {
-      if (event.code == button.dataset.code && event.key !== 'CapsLock') {
+      if (event.code === button.dataset.code && event.key !== 'CapsLock') {
         button.classList.remove('active');
       }
     });
@@ -250,19 +250,19 @@ let qwe = 0;
 document.addEventListener('keydown', (event) => {
   event.stopPropagation();
   event.preventDefault();
-  if (event.key == 'Shift' && qwe == 0) {
-    qwe++;
-    if (currentLang == RU && !isCaps) {
+  if (event.key === 'Shift' && qwe === 0) {
+    qwe += 1;
+    if (currentLang === RU && !isCaps) {
       changeKeyboard(shiftedRU);
       isCaps = true;
-    } else if (currentLang == RU && isCaps) {
+    } else if (currentLang === RU && isCaps) {
       changeKeyboard(RU);
       isCaps = false;
     }
-    if (currentLang == EN && !isCaps) {
+    if (currentLang === EN && !isCaps) {
       changeKeyboard(shiftedEN);
       isCaps = true;
-    } else if (currentLang == EN && isCaps) {
+    } else if (currentLang === EN && isCaps) {
       changeKeyboard(EN);
       isCaps = false;
     }
@@ -272,12 +272,12 @@ document.addEventListener('keydown', (event) => {
 
 document.addEventListener('keyup', (event) => {
   qwe = 0;
-  if (event.key == 'Shift') {
-    if (currentLang == RU && isCaps) {
+  if (event.key === 'Shift') {
+    if (currentLang === RU && isCaps) {
       changeKeyboard(RU);
       isCaps = false;
     }
-    if (currentLang == EN && isCaps) {
+    if (currentLang === EN && isCaps) {
       changeKeyboard(EN);
       isCaps = false;
     }
@@ -287,19 +287,19 @@ document.addEventListener('keyup', (event) => {
 document.addEventListener('keydown', (event) => {
   event.stopPropagation();
   event.preventDefault();
-  if (event.key == 'CapsLock') {
-    qwe++;
-    if (currentLang == RU && !isCaps) {
+  if (event.key === 'CapsLock') {
+    qwe += 1;
+    if (currentLang === RU && !isCaps) {
       changeKeyboard(shiftedRU);
       isCaps = true;
-    } else if (currentLang == RU && isCaps) {
+    } else if (currentLang === RU && isCaps) {
       changeKeyboard(RU);
       isCaps = false;
     }
-    if (currentLang == EN && !isCaps) {
+    if (currentLang === EN && !isCaps) {
       changeKeyboard(shiftedEN);
       isCaps = true;
-    } else if (currentLang == EN && isCaps) {
+    } else if (currentLang === EN && isCaps) {
       changeKeyboard(EN);
       isCaps = false;
     }
@@ -314,11 +314,11 @@ buttonsShift.forEach(button => {
     buttonCaps.classList.remove('active');
     const buttonsAlt = document.querySelectorAll('.keyboard__button_alt');
     function changeLanguage() {
-      if (currentLang == RU) {
+      if (currentLang === RU) {
         currentLang = EN;
         changeKeyboard(currentLang);
         localStorage.setItem('currentLang', JSON.stringify(currentLang));
-      } else if (currentLang == EN) {
+      } else if (currentLang === EN) {
         currentLang = RU;
         changeKeyboard(currentLang);
         localStorage.setItem('currentLang', JSON.stringify(currentLang));
@@ -338,17 +338,17 @@ buttonsShift.forEach(button => {
 buttonsShift.forEach(button => {
   button.addEventListener('click', () => {
     button.classList.add('active');
-    if (currentLang == RU) {
+    if (currentLang === RU) {
       changeKeyboard(shiftedRU);
-    } else if (currentLang == EN) {
+    } else if (currentLang === EN) {
       changeKeyboard(shiftedEN);
     }
     isCaps = true;
     function changeCaps() {
-      if (isCaps && currentLang == RU) {
+      if (isCaps && currentLang === RU) {
         changeKeyboard(RU);
         isCaps = false;
-      } else if (isCaps && currentLang == EN) {
+      } else if (isCaps && currentLang === EN) {
         changeKeyboard(EN);
         isCaps = false;
       }
@@ -366,17 +366,17 @@ buttonsShift.forEach(button => {
 
 buttonCaps.addEventListener('click', () => {
   buttonCaps.classList.toggle('active');
-  if (currentLang == RU && !isCaps) {
+  if (currentLang === RU && !isCaps) {
     changeKeyboard(shiftedRU);
     isCaps = true;
-  } else if (currentLang == RU && isCaps) {
+  } else if (currentLang === RU && isCaps) {
     changeKeyboard(RU);
     isCaps = false;
   }
-  if (currentLang == EN && !isCaps) {
+  if (currentLang === EN && !isCaps) {
     changeKeyboard(shiftedEN);
     isCaps = true;
-  } else if (currentLang == EN && isCaps) {
+  } else if (currentLang === EN && isCaps) {
     changeKeyboard(EN);
     isCaps = false;
   }
@@ -388,6 +388,7 @@ function runOnKeys(func, ...codes) {
   document.addEventListener('keydown', (event) => {
     pressed.add(event.code);
 
+    // eslint-disable-next-line no-restricted-syntax
     for (let code of codes) {
       if (!pressed.has(code)) {
         return;
@@ -404,11 +405,11 @@ function runOnKeys(func, ...codes) {
 
 runOnKeys(
   () => {
-    if (currentLang == RU) {
+    if (currentLang === RU) {
       currentLang = EN;
       changeKeyboard(currentLang);
       localStorage.setItem('currentLang', JSON.stringify(currentLang));
-    } else if (currentLang == EN) {
+    } else if (currentLang === EN) {
       currentLang = RU;
       changeKeyboard(currentLang);
       localStorage.setItem('currentLang', JSON.stringify(currentLang));
@@ -424,7 +425,7 @@ const buttonBackspace = document.querySelector('.keyboard__button_backspace');
 function backSpace() {
   if (cursorPos > 0) {
     let array = textArea.textContent.split('');
-    cursorPos--;
+    cursorPos -= 1;
     array.splice(cursorPos, 1);
     textArea.textContent = array.join('');
   }
@@ -451,10 +452,10 @@ buttonDel.addEventListener('click', del);
 document.addEventListener('keydown', (event) => {
   event.stopPropagation();
   event.preventDefault();
-  if (event.key == 'Backspace') {
+  if (event.key === 'Backspace') {
     backSpace();
   }
-  if (event.key == 'Delete') {
+  if (event.key === 'Delete') {
     del();
   }
 });
@@ -466,7 +467,7 @@ const buttonArrowDown = document.querySelector('.keyboard__button_arrDown');
 
 function toLeft() {
   if (cursorPos > 0) {
-    cursorPos--;
+    cursorPos -= 1;
   }
   textArea.focus();
   textArea.setSelectionRange(cursorPos, cursorPos);
@@ -474,7 +475,7 @@ function toLeft() {
 
 function toRight() {
   if (cursorPos < textArea.textContent.length) {
-    cursorPos++;
+    cursorPos += 1;
   }
   textArea.focus();
   textArea.setSelectionRange(cursorPos, cursorPos);
@@ -485,14 +486,14 @@ buttonArrowRight.addEventListener('click', toRight);
 
 buttonArrowUp.addEventListener('click', () => {
   insertInCurPos('▲');
-  cursorPos++;
+  cursorPos += 1;
   textArea.focus();
   textArea.setSelectionRange(cursorPos, cursorPos);
 });
 
 buttonArrowDown.addEventListener('click', () => {
   insertInCurPos('▼');
-  cursorPos++;
+  cursorPos += 1;
   textArea.focus();
   textArea.setSelectionRange(cursorPos, cursorPos);
 });
@@ -500,21 +501,21 @@ buttonArrowDown.addEventListener('click', () => {
 document.addEventListener('keydown', (event) => {
   event.stopPropagation();
   event.preventDefault();
-  if (event.code == 'ArrowLeft') {
+  if (event.code === 'ArrowLeft') {
     toLeft();
   }
-  if (event.code == 'ArrowRight') {
+  if (event.code === 'ArrowRight') {
     toRight();
   }
-  if (event.code == 'ArrowUp') {
+  if (event.code === 'ArrowUp') {
     insertInCurPos('▲');
-    cursorPos++;
+    cursorPos += 1;
     textArea.focus();
     textArea.setSelectionRange(cursorPos, cursorPos);
   }
-  if (event.code == 'ArrowDown') {
+  if (event.code === 'ArrowDown') {
     insertInCurPos('▼');
-    cursorPos++;
+    cursorPos += 1;
     textArea.focus();
     textArea.setSelectionRange(cursorPos, cursorPos);
   }
